@@ -1,21 +1,5 @@
 ﻿/* 1.3.1 Assignment
 Write a program in C# to calculate area of triangle, square and rectangle. Write 3 different functions for each shape to take dimensions of figure and display the area. You may create menus. */
-/* 1.3.2 Assignment
-Write a console application in C# to explore different ways in which array is declared and initialized and explore different properties and methods of Array class. */
-/* 1.3.3 Assignment
-Write a program in C# to read n number of values in an array and display it in reverse order.
-Test Data :
-Input the number of elements to store in the array :3
-Input 3 number of elements in the array :
-element - 0 : 2
-element - 1 : 5
-element - 2 : 7
-Expected Output:
-The values store into the array are:
-2 5 7
-The values store into the array in reverse are :
-7 5 2
-*/
 using System;
 
 namespace Assignment_1._3._1
