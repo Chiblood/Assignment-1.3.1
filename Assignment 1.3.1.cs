@@ -17,63 +17,102 @@ The values store into the array in reverse are :
 7 5 2
 */
 using System;
-int choice = 0;
 
-while (choice != 4)
+namespace Assignment_1._3._1
 {
-    Console.WriteLine("\n Area Calculator Menu, enter a number between 1 and 3:");
-    Console.WriteLine("1. Area of Triangle");
-    Console.WriteLine("2. Area of Square");
-    Console.WriteLine("3. Area of Rectangle");
-    Console.WriteLine("4. Exit");
-    Console.Write("Enter your choice: ");
-    if (!int.TryParse(Console.ReadLine(), out choice))
+    class Program
     {
-        Console.WriteLine("Please choose a valid option (1-4)");
-        continue;
-    }
-    switch (choice)
-    {
-        case 1: // Area of Triangle
+        static void AreaOfTriangle(float baseLength, float height)
+        {
+            float area = 0.5f * baseLength * height;
+            Console.WriteLine($"Area of Triangle: (1/2) * {baseLength} * {height} = {area}");
+        }
+        static void AreaOfSquare(float side)
+        {
+            float area = side * side;
+            Console.WriteLine($"Area of Square: {side} * {side} = {area}");
+        }
+        static void AreaOfRectangle(float length, float width)
+        {
+            float area = length * width;
+            Console.WriteLine($"Area of Rectangle: {length} * {width} = {area}");
+        }
+        static float GetPositiveFloatFromUser(string prompt)
+        {
+            float value;
+            Console.Write(prompt);
+            while (!float.TryParse(Console.ReadLine(), out value) || value <= 0)
             {
-                Console.WriteLine("\n--- Area of Triangle: (1/2) * base * height ---");
-                Console.Write("Enter base: ");
-                float.TryParse(Console.ReadLine(), out float baseLength);
-                Console.Write("Enter height: ");
-                float.TryParse(Console.ReadLine(), out float height);
-                float area = 0.5f * baseLength * height;
-                Console.WriteLine($"Area of Triangle: (1/2) * {baseLength} * {height} = {area}");
-                break;
+                Console.WriteLine("Invalid input. Please enter a positive number.");
+                Console.Write(prompt);
             }
-        case 2: // Area of Square
+            return value;
+        }
+        static void Main(string[] args)
+        {
+            bool continueProgram = true;
+            Console.WriteLine("\n--------------------------------");
+            Console.WriteLine("Welcome to the Area Calculator!");
+            Console.WriteLine("--------------------------------");
+
+            while (continueProgram)
             {
-                Console.WriteLine("\n--- Area of Square: side * side ---");
-                Console.Write("Enter side length: ");
-                float.TryParse(Console.ReadLine(), out float side);
-                float area = side * side;
-                Console.WriteLine($"Area of Square: {side} * {side} = {area}");
-                break;
+                Console.WriteLine("\nArea Calculator Menu, enter a number between 1 and 4:");
+                Console.WriteLine("1. Area of Triangle");
+                Console.WriteLine("2. Area of Square");
+                Console.WriteLine("3. Area of Rectangle");
+                Console.WriteLine("4. Exit");
+                Console.Write("Enter your choice: ");
+                if (!int.TryParse(Console.ReadLine(), out int choice) || choice < 1 || choice > 4)
+                {
+                    Console.WriteLine("Invalid input. Please enter a number from 1 to 4.");
+                    continue;
+                }
+                switch (choice)
+                {
+                    case 1: // Area of Triangle
+                        {
+                            Console.WriteLine("\n--- Area of Triangle: (1/2) * base * height ---");
+                            float baseLength = GetPositiveFloatFromUser("Enter base: ");
+                            float height = GetPositiveFloatFromUser("Enter height: ");
+                            AreaOfTriangle(baseLength, height);
+                            break;
+                        }
+                    case 2: // Area of Square
+                        {
+                            Console.WriteLine("\n--- Area of Square: side * side ---");
+                            float side = GetPositiveFloatFromUser("Enter side length: ");
+                            AreaOfSquare(side);
+                            break;
+                        }
+                    case 3: // Area of Rectangle
+                        {
+                            Console.WriteLine("\n--- Area of Rectangle: length * width ---");
+                            float length = GetPositiveFloatFromUser("Enter length: ");
+                            float width = GetPositiveFloatFromUser("Enter width: ");
+                            AreaOfRectangle(length, width);
+                            break;
+                        }
+                    case 4: // Exit
+                        {
+                            Console.WriteLine("Exiting...");
+                            continueProgram = false;
+                            break;
+                        }
+                    default:
+                        {
+                            // This case is now handled by the input validation check above.
+                            break;
+                        }
+                }
+                // Pause and wait for user to press Enter before returning to the menu.
+                if (continueProgram)
+                {
+                    Console.Write("\nPress Enter to return to the menu.");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
             }
-            case 3: // Area of Rectangle
-            {
-                Console.WriteLine("\n--- Area of Rectangle: length * width ---");
-                Console.Write("Enter length: ");
-                float.TryParse(Console.ReadLine(), out float length);
-                Console.Write("Enter width: ");
-                float.TryParse(Console.ReadLine(), out float width);
-                float area = length * width;
-                Console.WriteLine($"Area of Rectangle: {length} * {width} = {area}");
-                break;
-            }
-        case 4: // Exit
-            {
-                Console.WriteLine("Exiting...");
-                break;
-            }
-        default:
-            {
-                Console.WriteLine("Please choose a valid option (1-4)");
-                break;
-            }
+        }
     }
 }
